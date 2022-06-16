@@ -44,7 +44,7 @@ def predict(user_id):
 
     preds = model.predict([tf.constant(arr_user),tf.constant(arr_hotel)])
     predictions = np.array([a[0] for a in preds])
-    recommended_hotel_id = (-predictions).argsort()[:100]
+    recommended_hotel_id = (-predictions).argsort()
 
     arr_output = []
     for item in recommended_hotel_id:
@@ -55,8 +55,7 @@ def predict(user_id):
     message = jsonify({
         "message": "Predict success", 
         "userId": user_input,
-        "output": output,
-        "recommendedHotelId": recommended_hotel_id.tolist()
+        "output": output
         })
     return make_response(message, 200)
 
